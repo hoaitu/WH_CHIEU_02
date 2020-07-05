@@ -1,4 +1,4 @@
-package TTHT;
+package TTHT1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,11 +27,11 @@ public class DBControl {
 	static String remotePath;
 	static String localPath;
 	static String dirLog;
+	static String download;
 
 	public static void getConfig(int id) throws SQLException {
-		PreparedStatement pre = (PreparedStatement) DBConnection
-				.createConnection().prepareStatement(
-						"SELECT * FROM control.myconfig where id=?;");
+		PreparedStatement pre = (PreparedStatement) DBConnection.createConnection()
+				.prepareStatement("SELECT * FROM control.myconfig where id=?;");
 		pre.setInt(1, id);
 		ResultSet tmp = pre.executeQuery();
 		tmp.next();
@@ -51,6 +51,7 @@ public class DBControl {
 		password = tmp.getString("passAcess");
 		remotePath = tmp.getString("remotePathAcess");
 		localPath = tmp.getString("localPathAcesss");
+		port = Integer.parseInt(tmp.getString("port"));
 		// dirLog
 		dirLog = tmp.getString("dirLog");
 

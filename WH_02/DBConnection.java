@@ -1,4 +1,4 @@
-package TTHT;
+package TTHT1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,17 +20,20 @@ public class DBConnection {
 		System.out.println("Connecting database....");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = (Connection) DriverManager.getConnection(driver + "//"
-					+ addressConfig, USER, PASS);
+			con = (Connection) DriverManager.getConnection(driver + "//" + addressConfig, USER, PASS);
 			System.out.println("Ok rồi nha !!!!!");
-			System.out
-					.println("----------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------");
 		} catch (ClassNotFoundException e) {
 			System.out.println("KO k.noi đk nha!!!!!!!!!!");
-			System.out
-					.println("----------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------");
 		}
 		return con;
+	}
+
+	public static void main(String[] args) throws SQLException {
+		DBConnection db = new DBConnection();
+		db.createConnection();
+		System.out.println("Thanh công");
 	}
 
 }

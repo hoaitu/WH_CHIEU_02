@@ -1,4 +1,4 @@
-package TTHT;
+package TTHT1;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,8 +21,7 @@ public class ExtractData {
 	static final String NUMBER_REGEX = "^[0-9]+$";
 
 	// truyền dấu phân cách , đường dẫn file ở đâu
-	public void load(String delimeter, String pathFile)
-			throws ClassNotFoundException, SQLException, IOException {
+	public void load(String delimeter, String pathFile) throws ClassNotFoundException, SQLException, IOException {
 		System.out.println("Connect DB Successfully :)");
 		File f = new File(pathFile);
 		if (!f.exists()) {
@@ -40,8 +39,7 @@ public class ExtractData {
 	}
 
 	// đọc dữ liệu
-	public void readData() throws IOException, EncryptedDocumentException,
-			InvalidFormatException {
+	public void readData() throws IOException, EncryptedDocumentException, InvalidFormatException {
 		System.out.println("Connect DB Successfully Read file:)");
 		File f = new File(DBControl.dataPath);
 		System.out.println(f);
@@ -69,11 +67,9 @@ public class ExtractData {
 		for (int j = 0; j < countToken; j++) {
 			String token = stoken.nextToken();
 			if (Pattern.matches(NUMBER_REGEX, token)) {
-				lines += (j == countToken - 1) ? token.trim() + ")," : token
-						.trim() + ",";
+				lines += (j == countToken - 1) ? token.trim() + ")," : token.trim() + ",";
 			} else {
-				lines += (j == countToken - 1) ? "'" + token.trim() + "'),"
-						: "'" + token.trim() + "',";
+				lines += (j == countToken - 1) ? "'" + token.trim() + "')," : "'" + token.trim() + "',";
 			}
 			values += lines;
 			lines = "";
@@ -84,8 +80,7 @@ public class ExtractData {
 	public String readValuesTXT(String s_file, String delim) {
 		String values = "";
 		try {
-			BufferedReader bReader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(s_file)));
+			BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(s_file)));
 			String line;
 			while ((line = bReader.readLine()) != null) {
 				values += readLines(line, delim);
@@ -141,42 +136,32 @@ public class ExtractData {
 			// kết nối vs thằng URL
 			System.out.println("chờ kết nối URL");
 			DBConnection.connectionSource = (Connection) DriverManager
-					.getConnection(DBConnection.driver + "//"
-							+ DBControl.source, DBConnection.USER,
-							DBConnection.PASS);
+					.getConnection(DBConnection.driver + "//" + DBControl.source, DBConnection.USER, DBConnection.PASS);
 			System.out.println("kết nối URL thành công ");
 
-			System.out.println("Creating table " + DBControl.tableName
-					+ ".......");
-			PreparedStatement state = DBConnection.createConnection()
-					.prepareStatement(sqlCreateTb);
+			System.out.println("Creating table " + DBControl.tableName + ".......");
+			PreparedStatement state = DBConnection.createConnection().prepareStatement(sqlCreateTb);
 			System.out.println(state);
 			state.execute();
 			tableStatus = true;
 			System.out.println("Create Table: Complete!!!");
-			System.out
-					.println("----------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------");
 		} catch (Exception e) {
 			System.out.println("Can't create table " + DBControl.tableName);
-			System.out
-					.println("----------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------");
 		}
 		if (tableStatus) {
 			try {
-				System.out.println("Insert  table " + DBControl.tableName
-						+ ".......");
-				PreparedStatement stateInsert = DBConnection.createConnection()
-						.prepareStatement(sqlInsertData);
+				System.out.println("Insert  table " + DBControl.tableName + ".......");
+				PreparedStatement stateInsert = DBConnection.createConnection().prepareStatement(sqlInsertData);
 				System.out.println(stateInsert);
 				stateInsert.execute();
 				tableStatus = true;
 				System.out.println("Insert Table: Complete!!!");
-				System.out
-						.println("----------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------");
 			} catch (Exception e) {
 				System.out.println("Can't Insert table " + DBControl.tableName);
-				System.out
-						.println("----------------------------------------------------------------");
+				System.out.println("----------------------------------------------------------------");
 			}
 		}
 	}
