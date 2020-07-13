@@ -95,10 +95,7 @@ public class ExtractData {
 	public static String readValuesXLSX(File s_file) {
 		String values = "";
 		String value = "";
-//		File f = new File(soure);
-//		if (f.isDirectory()) {
-//			File[] list_file = f.listFiles();
-//			for (File s_file : list_file) {
+
 		try {
 			FileInputStream fileIn = new FileInputStream(s_file);
 			XSSFWorkbook workBooks = new XSSFWorkbook(fileIn);
@@ -138,9 +135,6 @@ public class ExtractData {
 		} catch (IOException e) {
 			return null;
 		}
-//			}
-//		}
-//		return values;
 	}
 
 	/// TXT
@@ -209,9 +203,10 @@ public class ExtractData {
 				////
 
 				/////
-				sql = "INSERT INTO sinhvien_sang_nhom2 (ID,Lname,FName,DateOfBirth,IDClass,className,phone, mail,adress,Note) VALUES "
-						+ values + ";";
-//		sql = "INSERT INTO " + staging_table + "(" + field_name + ") VALUES " + values;
+//				sql = "INSERT INTO dbstaging.sinhvien_sang_nhom2 (ID,Lname,FName,DateOfBirth,IDClass,className,phone, mail,adress,Note) VALUES "
+//						+ values + ";";
+				sql = "INSERT INTO " + DBControl.nameConfig + "." + DBControl.tableName + "(" + DBControl.listofcol
+						+ ") VALUES " + values;
 				System.out.println(sql);
 				try {
 
@@ -240,9 +235,10 @@ public class ExtractData {
 		try {
 			// kết nối vs thằng URL
 			System.out.println("chờ kết nối URL");
-			DBConnection.connectionSource = (Connection) DriverManager
-					.getConnection(DBConnection.driver + "//" + DBControl.source, DBConnection.USER, DBConnection.PASS);
-			System.out.println("kết nối URL thành công ");
+//			DBConnection.connectionSource = (Connection) DriverManager.getConnection(
+//					DBConnection.driver + "//" + DBConnection.source, DBConnection.USER, DBConnection.PASS);
+//			System.out.println("kết nối URL thành công ");
+//			con = (Connection) DriverManager.getConnection(driver + "//" + addressConfig, USER, PASS);
 
 //			System.out.println("Creating table " + DBControl.tableName + ".......");
 //			PreparedStatement state = DBConnection.createConnection().prepareStatement(sqlCreateTb);

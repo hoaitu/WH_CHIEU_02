@@ -10,7 +10,7 @@ public class DBConnection {
 	static String hostName = "localhost";
 	static String driver = "jdbc:mysql:";
 	static String addressConfig = "localhost:3306/control";
-	static String source = "localhost:3306/dwh_1";
+	static String source = "localhost:3306/dbstaging";
 	static String dbNameConfig = "myconfig";
 	static String dbNameLog = "logs";
 	static Connection con;
@@ -21,6 +21,7 @@ public class DBConnection {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = (Connection) DriverManager.getConnection(driver + "//" + addressConfig, USER, PASS);
+			connectionSource = (Connection) DriverManager.getConnection(driver + "//" + source, USER, PASS);
 			System.out.println("Ok rồi nha !!!!!");
 			System.out.println("----------------------------------------------------------------");
 		} catch (ClassNotFoundException e) {

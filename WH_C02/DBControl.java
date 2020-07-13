@@ -28,6 +28,8 @@ public class DBControl {
 	static String localPath;
 	static String dirLog;
 	static String download;
+	static String listofcol;
+	static String nameConfig;
 
 	public static void getConfig(int id) throws SQLException {
 		PreparedStatement pre = (PreparedStatement) DBConnection.createConnection()
@@ -38,14 +40,17 @@ public class DBControl {
 		tableName = tmp.getString("nameTable");
 		System.out.println(tableName);
 		numOfcol = Integer.parseInt(tmp.getString("numOfCol"));
-		String listofcol = tmp.getString("listField");
+		listofcol = tmp.getString("listField");
 
 		dataPath = tmp.getString("dataPath");
-		// URL db đưa lên:: jdbc:mysql://localhost:3306/dwh_1
+		// URL db đưa lên:: jdbc:mysql://localhost:3306/dbstaging
 		delimeter = tmp.getString("delimiter");
 		StringTokenizer tokens = new StringTokenizer(listofcol, delimeter);
 		System.out.println("......Source URL.");
 		source = tmp.getString("SourceURL");
+		System.out.println(source);
+		//
+		nameConfig = tmp.getString("nameConfig");
 		// using step1 dow file
 		host = tmp.getString("hostAcess");
 		username = tmp.getString("userNameAcess");
@@ -62,9 +67,9 @@ public class DBControl {
 		System.out.println("Get config: complete!!!!");
 	}
 
-//	public static void main(String[] args) throws SQLException {
-//		DBControl d = new DBControl();
-//		d.getConfig(1);
-//	}
+	public static void main(String[] args) throws SQLException {
+		DBControl d = new DBControl();
+		d.getConfig(1);
+	}
 
 }
